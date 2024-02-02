@@ -1,9 +1,8 @@
-const myVar = "C is fun\nPython is cool\nJavaScript is amazing";
-const lines = myVar.split("\n");
-
-let i = 0;
-
-while(i < lines.length){
+const lines = [
+    "C is fun",
+    "Python is cool",
+    "Javascript is amazing"
+];
+for(let i = 0; i < lines.length; i++){
     console.log(lines[i]);
-    i++;
 }
