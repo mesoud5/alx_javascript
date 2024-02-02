@@ -1,5 +1,5 @@
-// Define a constant function named 'add'
+// Define the 'add' function
 const add = (a, b) => a + b;
 
-// Now, you can use the 'add' function from anywhere
-console.log(add(3, 5)); // Output: 8
+// Export the 'add' function for use in other files
+// module.exports = { add };
