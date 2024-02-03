@@ -1,6 +1,11 @@
 #!/usr/bin/node
-let add = function(a, b) {
-    return a + b;
-};
 
-console.log(add(4, 85));
+// Define the add function
+function add(a, b) {
+    return a + b;
+}
+
+// Export the add function
+module.exports = {
+    add: add
+};
