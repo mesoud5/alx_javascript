@@ -1,4 +1,5 @@
-add = function (a, b){
+let add = function (a, b){
     return a + b
 }
-console.log(add(3, 5))
+// let result = add(3, 5)
+// console.log(result)
