@@ -2,7 +2,7 @@
 
 function addMeMaybe(number, theFunction) {
   // Base case: Stop recursion when the number exceeds a certain limit
-  if (number > 10) {
+  if (number == 10) {
     return;
   }
 
