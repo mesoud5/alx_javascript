@@ -1,7 +1,7 @@
 #!/usr/bin/node
-const callMeMoby = function (x, theFunction) {
+function callMeMoby (x, theFunction) {
     return x * theFunction()
 };
-callMeMoby(3, function () {
-  console.log('C is fun');
-});
+module.exports = {
+  callMeMoby: callMeMoby
+};
