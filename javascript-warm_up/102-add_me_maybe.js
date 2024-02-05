@@ -1,11 +1,6 @@
 #!/usr/bin/node
 
-function addMeMaybe(number, theFunction) {
-  // Base case: Stop recursion when the number exceeds a certain limit
-  if (number == 10) {
-    return;
-  }
-
+const addMeMaybe = (number, theFunction) => {
   // Increment the number
   number++;
 
@@ -16,7 +11,4 @@ function addMeMaybe(number, theFunction) {
   theFunction(number);
 }
 
-
-module.exports = {
-  addMeMaybe: addMeMaybe
-};
+module.exports.addMeMaybe = addMeMaybe;
