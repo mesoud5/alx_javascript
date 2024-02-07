@@ -1,7 +1,7 @@
-const Square = require('./5-square');
+const Squareparent = require('./5-square');
 
 
-class Square extends Square{
+class Square extends Squareparent{
     constructor(w, h) {
         this.width = w;
         this.height = h;
