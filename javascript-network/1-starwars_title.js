@@ -16,7 +16,7 @@ const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
  * here we are making request to the url provide declared above
  * and we have a call back function whivh will be executed after the request is completed and after the request complted it will pass it to the call back function as error if it's error to response if it's response and so on..
  * checks if there is any error if i will print error message if not it will continue
- * and again checks if the response status code is 200 which means succesfull if not it wil print error message
+ * and again checks if the response status code is 200 which means succesfull if not it will print error message
  * then if it pass the above checks it will create a variable named moviedata and put the response body in this variable and change it in to json format
  * then it will extract the title of the movie based on the provided id 
  */
