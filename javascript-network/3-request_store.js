@@ -37,6 +37,6 @@ request(url, (error, response, body) => {
       console.error('Error writing to file:', err);
       return;
     }
-    console.log(`Body response from ${url} has been saved to ${filePath}`);
+    //console.log(`Body response from ${url} has been saved to ${filePath}`);
   });
 });
