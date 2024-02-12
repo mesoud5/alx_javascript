@@ -22,7 +22,7 @@ request(apiUrl, (error, response, body) => {
 
   const films = JSON.parse(body).results;
   const numberOfMovies = films.filter(film =>
-    film.characters.includes(`/${WEDGE_ANTILLES_ID}/`)
+    film.characters.some(characterUrl => characterUrl.includes(`/${WEDGE_ANTILLES_ID}/`))
   ).length;
 
   console.log(numberOfMovies);
