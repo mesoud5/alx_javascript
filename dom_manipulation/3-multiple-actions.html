@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Creating and Removing Elements</title>
+</head>
+<body>
+  <div id="container"></div>
+<script>
+    const containers = document.getElementById('container');
+    const newparagraph = document.createElement('P');
+    newparagraph.textContent = 'New paragraph';
+    containers.appendChild(newparagraph)
+    const button = document.createElement('button');
+    button.textContent = 'toogle paragraph';
+    containers.appendChild(button)
+    button.addEventListener('click', function() {
+        if(newparagraph.style.display === 'none') {
+            newparagraph.style.display = 'block';
+        } else {
+            newparagraph.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
