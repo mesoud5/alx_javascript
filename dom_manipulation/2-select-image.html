@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Modifying Elements</title>
+  <style>
+    img {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <img id="myImage" src="https://picsum.photos/200/300" alt="My Image">
+<script>
+    const newimg = document.getElementById('#myImage');
+    newimg.src = 'https://picsum.photos/200/301';
+    newimg.alt = 'New image';
+</script>
+</body>
+</html>
