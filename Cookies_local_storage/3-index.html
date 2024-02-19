@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>creat basic cookies</title>
+    </head>
+    <body>
+        <div id="login-form">
+            <h2>Login to the website</h2>
+            <input type="text" id="firstname" placeholder="Firstname">
+            <input type="text" id="email" placeholder="Email">
+            <button id="button1" onclick="setCookies()">Log me in</button>
+            
+        </div>
+            
+        
+        
+        <div id="cookiescontainer"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+
+
+        <script>
+            
+            function setCookies() {
+                const name = document.getElementById('firstname').value;
+                const email = document.getElementById('email').value;
+                Cookies.set('firstname', name, {expires: 10})
+                Cookies.set('email', email, {expires: 10})
+            }
+            function showCookies() {
+                const firstname = Cookies.get('firstname')
+                const email = Cookies.get('email')
+
+                const newparagraph = document.createElement('p')
+
+                newparagraph.innerHTML = 'Email: ' + (email) +' '+'Firstname: ' + (firstname)
+                
+                document.body.appendChild(newparagraph)
+                
+                
+            }
+            function getCookie(name) {
+                if (Cookies.get(name)) {
+                    return Cookies.get(name)
+                } else {
+                    return '';
+                }
+            }
+            function showForm() {
+                const welcomemessage = document.getElementById('welcomeMessage')
+                if (welcomemessage) {
+                    welcomemessage.remove
+                }
+                const form = document.getElementById('login-form')
+                form.style.display = 'block'
+            }  
+            function hideForm() {
+                const form = document.getElementById('login-form')
+                form.style.display = 'none'
+            } 
+            function deleteCookiesAndShowForm() {
+                const firstname = Cookies.get('firstname')
+                const email = Cookies.get('email')
+                Cookies.remove('firstname')
+                Cookies.remove('email')
+                showForm()
+            }
+            function showWelcomeMessageOrForm() {
+                const firstname = Cookies.get('firstname')
+                const email = Cookies.get('email')
+                if (Cookies.get('firstname') == undefined && Cookies.get('email') == undefined) {
+                    showForm() 
+                } else {
+                    const welcomepage = document.getElementById('login-form')
+                    const welcome = document.createElement('h1')
+                    welcome.innerHTML = 'Welcome:' + (firstname) 
+                    const link = document.createElement(a)
+                    link.innerHTML = '(logout)'
+                    link.href = '#'
+                    link.onclick = deleteCookiesAndShowForm
+                    welcome.appendChild(link)
+                    welcomepage.appendChild(welcome)
+                }
+
+            }
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>creat cookies</title>
+    </head>
+    <body>
+        <h1>Login to the website</h1>
+        <input type="text" id="firstname" placeholder="Firstname">
+        <input type="text" id="email" placeholder="Email">
+        <button id="button1" onclick="setCookies()">Log me in</button>
+        <h1>cookies</h1>
+        <button id="button2" onclick="showCookies()">Show the cookies</button>
+        <div id="cookiescontainer"></div>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>-->
+
+
+        <script>
+            
+            function setCookies() {
+                const name = document.getElementById('firstname').value;
+                const email = document.getElementById('email').value;
+                const expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() + 10);
+                document.cookie = 'Email: '+ email + ' - ' + 'Firstname: ' + name + '; expires=' + expirationDate.toUTCString();
+              
+
+                alert("congra cookies saved succesfully!")
+            }
+            function showCookies() {
+
+                const cookies = document.cookie.replace(/=/g, ' : ').replace(/;/g, ' - ')
+
+                const newparagraph = document.createElement('p')
+
+                newparagraph.innerHTML =  cookies
+                
+               
+
+                document.body.appendChild(newparagraph)
+            }
+            function getCookie(name) {
+                if (Cookies.get(name)) {
+                   return Cookies.get(name)
+                } else {
+                   return '';
+                }
+            }
+        </script>
+    </body>
+
+</html>
