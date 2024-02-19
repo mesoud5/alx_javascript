@@ -89,10 +89,39 @@
 
 
 
-function getCookie(name) {
-    if (Cookies.get(name)) {
-        return Cookies.get(name)
-    } else {
-        return '';
+function showForm() {
+    const welcomemessage = document.getElementById('welcomeMessage')
+    if (welcomemessage) {
+        welcomemessage.remove
     }
+    const form = document.getElementById('login-form')
+    form.style.display = 'block'
+}  
+function hideForm() {
+    const form = document.getElementById('login-form')
+    form.style.display = 'none'
+} 
+function deleteCookiesAndShowForm() {
+    const firstname = Cookies.get('firstname')
+    const email = Cookies.get('email')
+    Cookies.remove('firstname')
+    Cookies.remove('email')
+    showForm()
 }
+function showWelcomeMessageOrForm() {
+    const firstname = Cookies.get('firstname')
+    const email = Cookies.get('email')
+    if (Cookies.get('firstname') == undefined && Cookies.get('email') == undefined) {
+        showForm() 
+    } else {
+        const welcomepage = document.getElementById('login-form')
+        const welcome = document.createElement('h1')
+        welcome.innerHTML = 'Welcome:' + (firstname) 
+        const link = document.createElement(a)
+        link.innerHTML = '(logout)'
+        link.href = '#'
+        link.onclick = deleteCookiesAndShowForm
+        welcome.appendChild(link)
+        welcomepage.appendChild(welcome)
+    }
+}    

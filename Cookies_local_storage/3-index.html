@@ -1,88 +1,86 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>creat basic cookies</title>
-    </head>
-    <body>
-        <div id="login-form">
-            <h2>Login to the website</h2>
-            <input type="text" id="firstname" placeholder="Firstname">
-            <input type="text" id="email" placeholder="Email">
-            <button id="button1" onclick="setCookies()">Log me in</button>
+<head>
+    <title>create cookies</title>
+</head>
+<body>
+    <div id="login-form">
+        <h2>Login to the website</h2>
+        <input type="text" id="firstname" placeholder="Firstname">
+        <input type="text" id="email" placeholder="Email">
+        <button id="button1" onclick="setCookies()">Log me in</button>
+    </div>
+
+    <script>
+        function setCookies() {
+            const name = document.getElementById('firstname').value;
+            const email = document.getElementById('email').value;
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 10);
+            document.cookie = 'Email=' + email + '; expires=' + expirationDate.toUTCString();
+            document.cookie = 'Firstname=' + name + '; expires=' + expirationDate.toUTCString();
+            alert("Congratulations! Cookies saved successfully!");
             
-        </div>
-            
-        
-        
-        <div id="cookiescontainer"></div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+            // Call the function to show welcome message after setting cookies
+            showWelcomeMessageOrForm();
+        }
 
+        function showForm() {
+            const form = document.getElementById('login-form');
+            form.style.display = 'block';
+        }
 
-        <script>
-            
-            function setCookies() {
-                const name = document.getElementById('firstname').value;
-                const email = document.getElementById('email').value;
-                Cookies.set('firstname', name, {expires: 10})
-                Cookies.set('email', email, {expires: 10})
-            }
-            function showCookies() {
-                const firstname = Cookies.get('firstname')
-                const email = Cookies.get('email')
+        function hideForm() {
+            const form = document.getElementById('login-form');
+            form.style.display = 'none';
+        }
 
-                const newparagraph = document.createElement('p')
+        function deleteCookiesAndShowForm() {
+            document.cookie = 'Email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = 'Firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            showForm();
+        }
 
-                newparagraph.innerHTML = 'Email: ' + (email) +' '+'Firstname: ' + (firstname)
-                
-                document.body.appendChild(newparagraph)
-                
-                
-            }
-            function getCookie(name) {
-                if (Cookies.get(name)) {
-                    return Cookies.get(name)
-                } else {
-                    return '';
+        function showWelcomeMessageOrForm() {
+            const firstname = getCookie('Firstname');
+            const email = getCookie('Email');
+            if (firstname === '' || email === '') {
+                showForm();
+            } else {
+                const welcomePage = document.getElementById('welcomeMessage');
+                if (!welcomePage) {
+                    const welcome = document.createElement('h1');
+                    welcome.id = 'welcomeMessage';
+                    welcome.innerHTML = 'Welcome: ' + firstname;
+                    const logoutLink = document.createElement('a');
+                    logoutLink.innerHTML = '(logout)';
+                    logoutLink.href = '#';
+                    logoutLink.style.fontStyle = 'italic';
+                    logoutLink.style.fontWeight = 'normal';
+                    logoutLink.style.marginLeft = '10px';
+                    logoutLink.onclick = function(event) {
+                        event.preventDefault();
+                        deleteCookiesAndShowForm();
+                        welcome.remove();
+                        logoutLink.remove();
+                    };
+                    welcome.appendChild(logoutLink);
+                    document.body.appendChild(welcome);
+                    hideForm()
                 }
             }
-            function showForm() {
-                const welcomemessage = document.getElementById('welcomeMessage')
-                if (welcomemessage) {
-                    welcomemessage.remove
-                }
-                const form = document.getElementById('login-form')
-                form.style.display = 'block'
-            }  
-            function hideForm() {
-                const form = document.getElementById('login-form')
-                form.style.display = 'none'
-            } 
-            function deleteCookiesAndShowForm() {
-                const firstname = Cookies.get('firstname')
-                const email = Cookies.get('email')
-                Cookies.remove('firstname')
-                Cookies.remove('email')
-                showForm()
-            }
-            function showWelcomeMessageOrForm() {
-                const firstname = Cookies.get('firstname')
-                const email = Cookies.get('email')
-                if (Cookies.get('firstname') == undefined && Cookies.get('email') == undefined) {
-                    showForm() 
-                } else {
-                    const welcomepage = document.getElementById('login-form')
-                    const welcome = document.createElement('h1')
-                    welcome.innerHTML = 'Welcome:' + (firstname) 
-                    const link = document.createElement(a)
-                    link.innerHTML = '(logout)'
-                    link.href = '#'
-                    link.onclick = deleteCookiesAndShowForm
-                    welcome.appendChild(link)
-                    welcomepage.appendChild(welcome)
-                }
+        }
 
+        function getCookie(name) {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    return cookie.substring(name.length + 1);
+                }
             }
-        </script>
-    </body>
-
+            return '';
+        }
+    </script>
+</body>
 </html>
