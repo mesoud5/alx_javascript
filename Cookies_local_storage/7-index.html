@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+
+<body>
+
+    <div id="store"></div>
+    <div id="cart"></div>
+
+    <script>
+        let availableItems = ['Shampoo', 'Soap', 'Sponge', 'Water'];
+
+        if (typeof (Storage) === "undefined") {
+            alert("Sorry, your browser does not support Web storage. Try again with a better one");
+        } else {
+            createStore();
+            displayCart();
+        }
+
+
+
+        // Get cart from Session Storage
+        function getCartFromStorage() {
+            return JSON.parse(sessionStorage.getItem('cart')) || {};
+        }
+
+
+        // Add item to cart
+        function addItemToCart(item) {
+            const cart = getCartFromStorage();
+            cart[item] = (cart[item] || 0) + 1;
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        // Remove item from cart
+        function removeItemfromCart(item) {
+            const cart = getCartFromStorage();
+            delete cart[item];
+            sessionStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+
+        // Clear cart
+        function clearCart() {
+            sessionStorage.removeItem('cart');
+            displayCart();
+        }
+
+        // Create store
+        function createStore() {
+            const storeDiv = document.getElementById('store');
+            const h2 = document.createElement('h2');
+            h2.textContent = "Available products:";
+            storeDiv.appendChild(h2);
+
+            const ul = document.createElement('ul');
+            availableItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                li.addEventListener('click', () => addItemToCart(item));
+                ul.appendChild(li);
+            });
+            storeDiv.appendChild(ul);
+        }
+
+        // Display cart
+        function displayCart() {
+            const cartDiv = document.getElementById('cart');
+            cartDiv.innerHTML = '';
+
+            const h2 = document.createElement('h2');
+            h2.textContent = "Your cart:";
+            cartDiv.appendChild(h2);
+
+            const div = document.createElement('div');
+            cartDiv.appendChild(div);
+
+            updateCart();
+        }
+
+        // Update cart
+        // Update cart
+        function updateCart() {
+            const cart = getCartFromStorage();
+            const cartDiv = document.querySelector('#cart div');
+
+            // Clear existing content inside cartDiv
+            cartDiv.innerHTML = '';
+
+            // Add Clear my cart item at the top of the cart
+            const clearButton = document.createElement('div');
+            clearButton.textContent = "Clear my cart";
+            clearButton.addEventListener('click', clearCart);
+            cartDiv.appendChild(clearButton);
+
+            // Add list of items to the cart
+            const ul = document.createElement('ul');
+            if (Object.keys(cart).length === 0) {
+                // If cart is empty, display "Your cart is empty"
+                const li = document.createElement('li');
+                li.textContent = "Your cart is empty";
+                ul.appendChild(li);
+            } else {
+                // If cart is not empty, display items with quantity
+                for (const item in cart) {
+                    const li = document.createElement('li');
+                    li.textContent = `${item} x ${cart[item]}`;
+
+                    // Create "(remove)" label
+                    const removeLabel = document.createElement('span');
+                    removeLabel.textContent = "(remove)";
+                    removeLabel.classList.add('remove-label'); // Add class for styling purposes
+
+                    // Add click event listener to remove item from cart
+                    removeLabel.addEventListener('click', () => removeItemfromCart(item));
+
+                    // Append "(remove)" label to list item
+                    li.appendChild(removeLabel);
+
+                    ul.appendChild(li);
+                }
+            }
+            cartDiv.appendChild(ul);
+        }
+
+
+
+        // Initialize
+
+        displayCart();
+    </script>
+</body>
+
+</html>
