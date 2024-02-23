@@ -1,5 +1,3 @@
-// Move this line inside the generateInputFields function
-// since we want to get the current value of numFields
 function generateInputFields(numFields) {
     const error = document.getElementById('error'); // Moved inside the function
     const container = document.getElementById('inputContainer');
@@ -20,7 +18,10 @@ function validateform() {
 
     if (!allfilled) {
         error.innerHTML = 'Please fill in all fields';
-        return false;
+        return false; // Prevent form submission if validation fails
     }
-    return true;
+    return true; // Allow form submission if validation succeeds
 }
+/**window.onload = function() {
+    generateInputFields(document.getElementById('numFields').value);
+};*/
